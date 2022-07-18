@@ -43,6 +43,7 @@ function setup() {
 				x: x,
 				y: y,
 				collapsed: false,
+				//array da 0 fino a N_TILES -1
 				options: [...Array(N_TILES).keys()],
 			}
 		}
@@ -50,7 +51,7 @@ function setup() {
 }
 
 function draw(){
-	// background(0);
+	background(0);
 
 	const lessEntropyElm = getLessEntropyElm(grid);
 	lessEntropyElm.options = [lessEntropyElm.options[int(Math.random() * lessEntropyElm.options.length)]];
@@ -113,7 +114,7 @@ function changeEntropy(grid, lessEntropyElm){
 	//guardo sopra
 	if (y != 0){
 		let cell = grid[(y-1)*DIM + x];
-		if (!cell.collapsed){
+		if (cell.options.length != 1){
 			let entropy = cell.options;
 			let newEntropy = [];
 			for (let possibleEntropy of entropy){
@@ -127,7 +128,7 @@ function changeEntropy(grid, lessEntropyElm){
 	//guardo sotto 
 	if (y != DIM-1){
 		let cell = grid[(y+1)*DIM + x];
-		if (!cell.collapsed){
+		if (cell.options.length != 1){
 			let entropy = cell.options;
 			let newEntropy = [];
 			for (let possibleEntropy of entropy){
@@ -141,7 +142,7 @@ function changeEntropy(grid, lessEntropyElm){
 	//guardo destra 
 	if (x != DIM-1){
 		let cell = grid[y*DIM + x+1];
-		if (!cell.collapsed){
+		if (cell.options.length != 1){
 			let entropy = cell.options;
 			let newEntropy = [];
 			for (let possibleEntropy of entropy){
@@ -155,7 +156,7 @@ function changeEntropy(grid, lessEntropyElm){
 	//guardo sinistra 
 	if (x != 0){
 		let cell = grid[y*DIM + x-1];
-		if (!cell.collapsed){
+		if (cell.options.length != 1){
 			let entropy = cell.options;
 			let newEntropy = [];
 			for (let possibleEntropy of entropy){
